@@ -9,7 +9,6 @@ import pe.edu.utp.criollo_y_punto_api.repository.PaymentTypeRepository;
 import pe.edu.utp.criollo_y_punto_api.service.PaymentTypeService;
 
 public class PaymentTypeServiceImpl implements PaymentTypeService {
-
     @Autowired
     private PaymentTypeRepository paymentTypeRepository;
 
@@ -37,5 +36,4 @@ public class PaymentTypeServiceImpl implements PaymentTypeService {
     public void delete(Integer paymentTypeId) {
         paymentTypeRepository.deleteById(paymentTypeId);
     }
-
 }

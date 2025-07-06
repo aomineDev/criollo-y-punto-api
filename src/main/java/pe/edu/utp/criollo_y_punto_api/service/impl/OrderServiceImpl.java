@@ -10,8 +10,7 @@ import pe.edu.utp.criollo_y_punto_api.repository.OrderRepository;
 import pe.edu.utp.criollo_y_punto_api.service.OrderService;
 
 @Service
-public class OrderImpl implements OrderService{
-
+public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
@@ -39,5 +38,4 @@ public class OrderImpl implements OrderService{
     public void delete(Integer orderId) {
         orderRepository.deleteById(orderId);
     }
-
 }
