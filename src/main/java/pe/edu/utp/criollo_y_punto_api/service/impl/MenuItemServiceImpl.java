@@ -10,7 +10,7 @@ import pe.edu.utp.criollo_y_punto_api.repository.MenuItemRepository;
 import pe.edu.utp.criollo_y_punto_api.service.MenuItemService;
 
 @Service
-public class MenuItemImpl implements MenuItemService{
+public class MenuItemServiceImpl implements MenuItemService {
 
   @Autowired
   private MenuItemRepository menuItemRepository;

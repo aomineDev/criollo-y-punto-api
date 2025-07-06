@@ -10,7 +10,7 @@ import pe.edu.utp.criollo_y_punto_api.repository.OrderItemRepository;
 import pe.edu.utp.criollo_y_punto_api.service.OrderItemService;
 
 @Service
-public class OrderItemImpl implements OrderItemService {
+public class OrderItemServiceImpl implements OrderItemService {
 
     @Autowired
     private OrderItemRepository orderItemRepository;
