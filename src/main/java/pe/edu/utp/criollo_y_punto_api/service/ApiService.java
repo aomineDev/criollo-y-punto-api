@@ -7,7 +7,7 @@ public interface ApiService<T> {
 
   T get(Integer id);
 
-  T save(T T);
+  T save(T entity);
 
   T update(T entity);
 
