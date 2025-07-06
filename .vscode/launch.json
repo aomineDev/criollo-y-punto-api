@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-CriolloYPuntoApiApplication<criollo_y_punto_api>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "pe.edu.utp.criollo_y_punto_api.CriolloYPuntoApiApplication",
+      "projectName": "criollo_y_punto_api",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
