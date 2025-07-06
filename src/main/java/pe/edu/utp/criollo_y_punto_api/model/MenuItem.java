@@ -47,5 +47,4 @@ public class MenuItem {
   @JoinColumn(name = "menu_category_id")
   @OnDelete(action = OnDeleteAction.SET_NULL)
   private MenuCategory menuCategory;
-
 }

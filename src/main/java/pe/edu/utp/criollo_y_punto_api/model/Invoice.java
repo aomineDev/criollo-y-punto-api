@@ -13,10 +13,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Invoice extends Voucher {
-
     @ManyToOne
     @JoinColumn(name = "juridical_customer_id")
     @OnDelete(action = OnDeleteAction.SET_NULL)
     private JuridicalCustomer juridicalCustomer;
-
 }

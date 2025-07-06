@@ -3,11 +3,13 @@ package pe.edu.utp.criollo_y_punto_api.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import pe.edu.utp.criollo_y_punto_api.model.MenuCategory;
 import pe.edu.utp.criollo_y_punto_api.repository.MenuCategoryRepository;
 import pe.edu.utp.criollo_y_punto_api.service.MenuCategoryService;
 
+@Service
 public class MenuCategoryServiceImpl implements MenuCategoryService {
   @Autowired
   private MenuCategoryRepository menuCategoryRepository;

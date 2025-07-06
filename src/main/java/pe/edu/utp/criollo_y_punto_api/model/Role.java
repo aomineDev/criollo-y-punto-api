@@ -18,7 +18,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "roles")
 public class Role {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
@@ -26,5 +25,4 @@ public class Role {
 
     @Column(name = "name", length = 50, nullable = false)
     private String name;
-
 }

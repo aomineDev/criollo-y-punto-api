@@ -15,7 +15,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Reserve {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reserve_id")
@@ -39,5 +38,4 @@ public class Reserve {
     @JoinColumn(name = "natural_customer_id")
     @OnDelete(action = OnDeleteAction.SET_NULL)
     private NaturalCustomer naturalCustomer;
-
 }
