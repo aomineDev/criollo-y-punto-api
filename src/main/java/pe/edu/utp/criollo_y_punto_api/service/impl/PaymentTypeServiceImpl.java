@@ -8,7 +8,7 @@ import pe.edu.utp.criollo_y_punto_api.model.PaymentType;
 import pe.edu.utp.criollo_y_punto_api.repository.PaymentTypeRepository;
 import pe.edu.utp.criollo_y_punto_api.service.PaymentTypeService;
 
-public class PaymentTypeImpl implements PaymentTypeService{
+public class PaymentTypeServiceImpl implements PaymentTypeService {
 
     @Autowired
     private PaymentTypeRepository paymentTypeRepository;
