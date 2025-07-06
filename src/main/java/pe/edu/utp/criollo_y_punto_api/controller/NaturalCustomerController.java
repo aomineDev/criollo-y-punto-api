@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.utp.criollo_y_punto_api.model.NaturalCustomer;
-import pe.edu.utp.criollo_y_punto_api.service.impl.NaturalCustomerServiceImpl;
+import pe.edu.utp.criollo_y_punto_api.service.NaturalCustomerService;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/api/natural-customer")
 public class NaturalCustomerController {
   @Autowired
-  private NaturalCustomerServiceImpl naturalCustomerService;
+  private NaturalCustomerService naturalCustomerService;
 
   @GetMapping
   public ResponseEntity<List<NaturalCustomer>> getNaturalCustomerList() {
