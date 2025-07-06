@@ -11,7 +11,6 @@ import pe.edu.utp.criollo_y_punto_api.service.MenuItemService;
 
 @Service
 public class MenuItemServiceImpl implements MenuItemService {
-
   @Autowired
   private MenuItemRepository menuItemRepository;
 
@@ -39,5 +38,4 @@ public class MenuItemServiceImpl implements MenuItemService {
   public void delete(Integer menuItemId) {
     menuItemRepository.deleteById(menuItemId);
   }
-
 }

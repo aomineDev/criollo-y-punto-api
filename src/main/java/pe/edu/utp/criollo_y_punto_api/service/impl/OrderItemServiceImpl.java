@@ -11,7 +11,6 @@ import pe.edu.utp.criollo_y_punto_api.service.OrderItemService;
 
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
-
     @Autowired
     private OrderItemRepository orderItemRepository;
 
@@ -39,5 +38,4 @@ public class OrderItemServiceImpl implements OrderItemService {
     public void delete(Integer orderItemId) {
         orderItemRepository.deleteById(orderItemId);
     }
-
 }

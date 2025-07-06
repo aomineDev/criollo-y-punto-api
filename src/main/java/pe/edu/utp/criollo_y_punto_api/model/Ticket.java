@@ -13,10 +13,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Ticket extends Voucher {
-
     @ManyToOne
     @JoinColumn(name = "natural_customer_id")
     @OnDelete(action = OnDeleteAction.SET_NULL)
     private NaturalCustomer naturalCustomer;
-
 }

@@ -15,7 +15,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "juridical_customers")
 public class JuridicalCustomer extends Person {
-
     @Column(name = "ruc", length = 11, nullable = false, unique = true)
     private String ruc;
 
@@ -30,5 +29,4 @@ public class JuridicalCustomer extends Person {
 
     @Column(name = "type_billing", nullable = false, length = 100)
     private String typeBilling;
-
 }

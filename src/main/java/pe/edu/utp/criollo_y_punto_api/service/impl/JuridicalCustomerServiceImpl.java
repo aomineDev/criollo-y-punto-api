@@ -3,11 +3,13 @@ package pe.edu.utp.criollo_y_punto_api.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import pe.edu.utp.criollo_y_punto_api.model.JuridicalCustomer;
 import pe.edu.utp.criollo_y_punto_api.repository.JuridicalCustomerRepository;
 import pe.edu.utp.criollo_y_punto_api.service.JuridicalCustomerService;
 
+@Service
 public class JuridicalCustomerServiceImpl implements JuridicalCustomerService {
   @Autowired
   private JuridicalCustomerRepository juridicalCustomerRepository;

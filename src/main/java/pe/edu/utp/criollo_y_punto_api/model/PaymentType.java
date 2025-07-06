@@ -10,7 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaymentType {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_type_id")
@@ -18,5 +17,4 @@ public class PaymentType {
 
     @Column(name = "name")
     private String name;
-
 }
