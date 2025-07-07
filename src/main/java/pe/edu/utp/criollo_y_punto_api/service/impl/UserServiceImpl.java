@@ -20,25 +20,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public User get(Integer userid) {
         return userRepository.findById(userid).orElse(null);
-
     }
 
     @Override
     public User save(User user) {
         return userRepository.save(user);
-
     }
 
     @Override
     public User update(User user) {
         return userRepository.save(user);
-
     }
 
     @Override
     public void delete(Integer userid) {
         userRepository.deleteById(userid);
-
     }
 
 }

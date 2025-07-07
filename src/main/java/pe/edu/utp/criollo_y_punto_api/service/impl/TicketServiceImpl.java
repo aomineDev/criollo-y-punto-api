@@ -19,26 +19,22 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket get(Integer ticketid) {
-                return ticketRepository.findById(ticketid).orElse(null);
-
+        return ticketRepository.findById(ticketid).orElse(null);
     }
 
     @Override
     public Ticket save(Ticket ticket) {
-            return ticketRepository.save(ticket);
-
+        return ticketRepository.save(ticket);
     }
 
     @Override
     public Ticket update(Ticket ticket) {
-            return ticketRepository.save(ticket);
-
+        return ticketRepository.save(ticket);
     }
 
     @Override
     public void delete(Integer ticketid) {
-            ticketRepository.deleteById(ticketid);
-
+        ticketRepository.deleteById(ticketid);
     }
 
 }

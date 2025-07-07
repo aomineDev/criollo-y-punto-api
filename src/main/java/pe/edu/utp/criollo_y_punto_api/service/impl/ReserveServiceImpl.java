@@ -24,20 +24,17 @@ public class ReserveServiceImpl implements ReserveService {
 
     @Override
     public Reserve save(Reserve reserve) {
-    return reserveRepository.save(reserve);
-
+        return reserveRepository.save(reserve);
     }
 
     @Override
     public Reserve update(Reserve reserve) {
-    return reserveRepository.save(reserve);
-
+        return reserveRepository.save(reserve);
     }
 
     @Override
     public void delete(Integer reserveid) {
-    reserveRepository.deleteById(reserveid);
-
+        reserveRepository.deleteById(reserveid);
     }
 
 }

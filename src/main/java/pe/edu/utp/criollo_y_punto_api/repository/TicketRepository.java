@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import pe.edu.utp.criollo_y_punto_api.model.Ticket;
 
 @Repository
-public interface TicketRepository extends JpaRepository<Ticket,Integer>{
-    
+public interface TicketRepository extends JpaRepository<Ticket, Integer> {
+
 }
