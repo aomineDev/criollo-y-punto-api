@@ -2,12 +2,11 @@ package pe.edu.utp.criollo_y_punto_api.service.impl;
 
 import java.util.List;
 
-import javax.management.relation.Role;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pe.edu.utp.criollo_y_punto_api.repository.RoleRepository;
 import pe.edu.utp.criollo_y_punto_api.service.RoleService;
+import pe.edu.utp.criollo_y_punto_api.model.Role;
 
 public class RoleServiceImpl implements RoleService {
     @Autowired

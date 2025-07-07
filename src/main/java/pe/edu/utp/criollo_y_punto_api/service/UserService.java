@@ -1,6 +1,6 @@
 package pe.edu.utp.criollo_y_punto_api.service;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import pe.edu.utp.criollo_y_punto_api.model.User;
 
 public interface UserService extends ApiService<User> {
 

@@ -1,6 +1,6 @@
 package pe.edu.utp.criollo_y_punto_api.service;
 
-import javax.management.relation.Role;
+import pe.edu.utp.criollo_y_punto_api.model.Role;
 
 public interface RoleService extends ApiService<Role> {
 

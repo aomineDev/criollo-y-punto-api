@@ -1,9 +1,9 @@
 package pe.edu.utp.criollo_y_punto_api.repository;
 
-import javax.management.relation.Role;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import pe.edu.utp.criollo_y_punto_api.model.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Integer> {
