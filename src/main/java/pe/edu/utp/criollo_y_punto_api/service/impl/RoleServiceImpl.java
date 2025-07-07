@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pe.edu.utp.criollo_y_punto_api.repository.RoleRepository;
 import pe.edu.utp.criollo_y_punto_api.service.RoleService;
 
-public class RolerServiceImpl implements RoleService {
+public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleRepository roleRepository;
 
