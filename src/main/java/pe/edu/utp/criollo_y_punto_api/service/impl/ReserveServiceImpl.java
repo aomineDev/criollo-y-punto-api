@@ -3,11 +3,13 @@ package pe.edu.utp.criollo_y_punto_api.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import pe.edu.utp.criollo_y_punto_api.model.Reserve;
 import pe.edu.utp.criollo_y_punto_api.repository.ReserveRepository;
 import pe.edu.utp.criollo_y_punto_api.service.ReserveService;
 
+@Service
 public class ReserveServiceImpl implements ReserveService {
     @Autowired
     private ReserveRepository reserveRepository;

@@ -3,11 +3,13 @@ package pe.edu.utp.criollo_y_punto_api.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import pe.edu.utp.criollo_y_punto_api.model.User;
 import pe.edu.utp.criollo_y_punto_api.repository.UserRepository;
 import pe.edu.utp.criollo_y_punto_api.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
