@@ -23,7 +23,6 @@ public class MenuCategoryController {
 
   @GetMapping
   public ResponseEntity<List<MenuCategory>> getMenuCategoryList() {
-    System.out.println("[singleton] cambio");
     return ResponseEntity.ok(menuCategoryService.getAll());
   }
 
