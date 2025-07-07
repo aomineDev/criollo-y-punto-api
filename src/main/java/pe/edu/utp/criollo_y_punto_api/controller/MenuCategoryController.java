@@ -21,8 +21,9 @@ public class MenuCategoryController {
   @Autowired
   private MenuCategoryService menuCategoryService;
 
-  @GetMapping()
+  @GetMapping
   public ResponseEntity<List<MenuCategory>> getMenuCategoryList() {
+    System.out.println("[singleton] cambio");
     return ResponseEntity.ok(menuCategoryService.getAll());
   }
 

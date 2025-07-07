@@ -27,7 +27,17 @@ public class MenuCategoryCache implements MenuCategoryService {
 
   @Override
   public MenuCategory get(Integer menuCategoryId) {
-    return menuCategoryService.get(menuCategoryId);
+    if (menuCategoryList == null) {
+      System.out.println("[cache] cache vacia, obteniendo de la base de datos");
+      return menuCategoryService.get(menuCategoryId);
+    }
+
+    System.out.println("[cache] obteniendo datos de la cache");
+
+    return menuCategoryList.stream()
+        .filter(menuCategory -> menuCategory.getMenuCategoryId() == menuCategoryId)
+        .findFirst()
+        .orElse(null);
   }
 
   @Override
