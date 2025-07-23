@@ -39,13 +39,6 @@ public abstract class Voucher {
     @Column(name = "igv", nullable = false)
     protected Double igv;
 
-    @Column(name = "turned")
-    protected double turned;
-
-    @ManyToOne
-    @JoinColumn(name = "payment_type_id")
-    protected PaymentType paymentType;
-
     @OneToOne
     @JoinColumn(name = "order_id")
     protected Order order;
