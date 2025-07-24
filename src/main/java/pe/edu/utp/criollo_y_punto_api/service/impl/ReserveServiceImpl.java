@@ -1,6 +1,7 @@
 package pe.edu.utp.criollo_y_punto_api.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class ReserveServiceImpl implements ReserveService {
     }
 
     @Override
-    public Reserve get(Integer reserveid) {
-        return reserveRepository.findById(reserveid).orElse(null);
+    public Optional<Reserve> get(Integer reserveid) {
+        return reserveRepository.findById(reserveid);
     }
 
     @Override
@@ -30,8 +31,12 @@ public class ReserveServiceImpl implements ReserveService {
     }
 
     @Override
-    public Reserve update(Reserve reserve) {
-        return reserveRepository.save(reserve);
+    public Optional<Reserve> update(Integer id, Reserve reserve) {
+        return reserveRepository.findById(id).map(existingReserve -> {
+            reserve.setReserveId(id);
+
+            return reserveRepository.save(reserve);
+        });
     }
 
     @Override

@@ -1,6 +1,7 @@
 package pe.edu.utp.criollo_y_punto_api.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class NaturalCustomerServiceImpl implements NaturalCustomerService {
   }
 
   @Override
-  public NaturalCustomer get(Integer id) {
-    return naturalCustomerRepository.findById(id).orElse(null);
+  public Optional<NaturalCustomer> get(Integer id) {
+    return naturalCustomerRepository.findById(id);
   }
 
   @Override
@@ -30,8 +31,12 @@ public class NaturalCustomerServiceImpl implements NaturalCustomerService {
   }
 
   @Override
-  public NaturalCustomer update(NaturalCustomer naturalCustomer) {
-    return naturalCustomerRepository.save(naturalCustomer);
+  public Optional<NaturalCustomer> update(Integer id, NaturalCustomer naturalCustomer) {
+    return naturalCustomerRepository.findById(id).map(existingNaturalCustomer -> {
+      naturalCustomer.setPersonId(id);
+
+      return naturalCustomerRepository.save(naturalCustomer);
+    });
   }
 
   @Override

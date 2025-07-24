@@ -21,7 +21,6 @@ import pe.edu.utp.criollo_y_punto_api.service.patron.factoryMethod.VoucherFactor
 
 @Service
 public class VoucherServiceImpl implements VoucherService {
-
     @Autowired
     private TicketService ticketService;
 
@@ -40,8 +39,8 @@ public class VoucherServiceImpl implements VoucherService {
     @Override
     public Ticket generarTicket(Ticket ticket) {
 
-        Order order = orderService.get(ticket.getOrder().getOrderId());
-        NaturalCustomer customer = naturalCustomerService.get(ticket.getNaturalCustomer().getPersonId());
+        Order order = orderService.get(ticket.getOrder().getOrderId()).orElse(null);
+        NaturalCustomer customer = naturalCustomerService.get(ticket.getNaturalCustomer().getPersonId()).orElse(null);
 
         VoucherFactory factory = new TicketFactory(customer);
         Ticket nuevoTicket = (Ticket) factory.createVoucher(order);
@@ -54,8 +53,9 @@ public class VoucherServiceImpl implements VoucherService {
     @Override
     public Invoice generarInvoice(Invoice invoice) {
 
-        Order order = orderService.get(invoice.getOrder().getOrderId());
-        JuridicalCustomer customer = juridicalCustomerService.get(invoice.getJuridicalCustomer().getPersonId());
+        Order order = orderService.get(invoice.getOrder().getOrderId()).orElse(null);
+        JuridicalCustomer customer = juridicalCustomerService.get(invoice.getJuridicalCustomer().getPersonId())
+                .orElse(null);
 
         VoucherFactory factory = new InvoiceFactory(customer);
         Invoice nuevaFactura = (Invoice) factory.createVoucher(order);

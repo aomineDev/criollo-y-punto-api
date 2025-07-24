@@ -1,6 +1,7 @@
 package pe.edu.utp.criollo_y_punto_api.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class InvoiceServiceImpl implements InvoiceService {
   }
 
   @Override
-  public Invoice get(Integer invoiceId) {
-    return invoiceRepository.findById(invoiceId).orElse(null);
+  public Optional<Invoice> get(Integer invoiceId) {
+    return invoiceRepository.findById(invoiceId);
   }
 
   @Override
@@ -30,8 +31,11 @@ public class InvoiceServiceImpl implements InvoiceService {
   }
 
   @Override
-  public Invoice update(Invoice invoice) {
-    return invoiceRepository.save(invoice);
+  public Optional<Invoice> update(Integer id, Invoice invoice) {
+    return invoiceRepository.findById(id).map(existingInvoice -> {
+      invoice.setVoucherId(id);
+      return invoiceRepository.save(invoice);
+    });
   }
 
   @Override

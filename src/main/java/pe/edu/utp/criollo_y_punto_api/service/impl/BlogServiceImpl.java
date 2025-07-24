@@ -1,6 +1,7 @@
 package pe.edu.utp.criollo_y_punto_api.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class BlogServiceImpl implements BlogService {
   }
 
   @Override
-  public Blog get(Integer blogId) {
-    return blogRepository.findById(blogId).orElse(null);
+  public Optional<Blog> get(Integer blogId) {
+    return blogRepository.findById(blogId);
   }
 
   @Override
@@ -30,8 +31,11 @@ public class BlogServiceImpl implements BlogService {
   }
 
   @Override
-  public Blog update(Blog blog) {
-    return blogRepository.save(blog);
+  public Optional<Blog> update(Integer id, Blog blog) {
+    return blogRepository.findById(id).map(existingBlog -> {
+      blog.setBlogId(id);
+      return blogRepository.save(blog);
+    });
   }
 
   @Override

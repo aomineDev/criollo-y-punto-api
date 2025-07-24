@@ -1,6 +1,7 @@
 package pe.edu.utp.criollo_y_punto_api.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket get(Integer ticketid) {
-        return ticketRepository.findById(ticketid).orElse(null);
+    public Optional<Ticket> get(Integer ticketid) {
+        return ticketRepository.findById(ticketid);
     }
 
     @Override
@@ -30,8 +31,12 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket update(Ticket ticket) {
-        return ticketRepository.save(ticket);
+    public Optional<Ticket> update(Integer id, Ticket ticket) {
+        return ticketRepository.findById(id).map(existingTicket -> {
+            ticket.setVoucherId(id);
+
+            return ticketRepository.save(ticket);
+        });
     }
 
     @Override

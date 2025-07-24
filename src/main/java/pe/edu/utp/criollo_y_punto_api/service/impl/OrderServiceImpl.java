@@ -1,6 +1,7 @@
 package pe.edu.utp.criollo_y_punto_api.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,13 +23,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order get(Integer orderId) {
-        Order order = orderRepository.findById(orderId).orElse(null);
-        if (order != null) {
-            order.initializeState();
-        }
-        return order;
-        // return orderRepository.findById(orderId).orElse(null);
+    public Optional<Order> get(Integer orderId) {
+        return orderRepository.findById(orderId);
     }
 
     @Override
@@ -42,9 +38,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order update(Order order) {
-        order.initializeState();
-        return orderRepository.save(order);
+    public Optional<Order> update(Integer id, Order order) {
+        return orderRepository.findById(id).map(existingOrder -> {
+            order.setOrderId(id);
+
+            order.initializeState();
+            return orderRepository.save(order);
+        });
     }
 
     @Override
@@ -53,9 +53,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-
     public Order startPreparation(Integer orderId) {
-        Order order = get(orderId);
+        Order order = orderRepository.findById(orderId).orElse(null);
         if (order != null) {
             order.startPreparation();
             return save(order);
@@ -66,7 +65,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
 
     public Order markAsReady(Integer orderId) {
-        Order order = get(orderId);
+        Order order = orderRepository.findById(orderId).orElse(null);
         if (order != null) {
             order.markAsReady();
             return save(order);
@@ -77,7 +76,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
 
     public Order deliverOrder(Integer orderId) {
-        Order order = get(orderId);
+        Order order = orderRepository.findById(orderId).orElse(null);
         if (order != null) {
             order.deliver();
             return save(order);
@@ -87,7 +86,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order cancelOrder(Integer orderId) {
-        Order order = get(orderId);
+        Order order = orderRepository.findById(orderId).orElse(null);
         if (order != null) {
             order.cancel();
             return save(order);
