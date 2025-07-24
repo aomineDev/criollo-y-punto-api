@@ -1,6 +1,7 @@
 package pe.edu.utp.criollo_y_punto_api.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role get(Integer roleid) {
-        return roleRepository.findById(roleid).orElse(null);
+    public Optional<Role> get(Integer roleid) {
+        return roleRepository.findById(roleid);
     }
 
     @Override
@@ -36,8 +37,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role update(Role role) {
-        return roleRepository.save(role);
+    public Optional<Role> update(Integer id, Role role) {
+        return roleRepository.findById(id).map(existingRole -> {
+            role.setRoleId(id);
+            return roleRepository.save(role);
+        });
     }
 
     @Override

@@ -1,6 +1,7 @@
 package pe.edu.utp.criollo_y_punto_api.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public Board get(Integer boardId) {
-    return boardRepository.findById(boardId).orElse(null);
+  public Optional<Board> get(Integer boardId) {
+    return boardRepository.findById(boardId);
   }
 
   @Override
@@ -36,8 +37,12 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public Board update(Board board) {
-    return boardRepository.save(board);
+  public Optional<Board> update(Integer id, Board board) {
+    return boardRepository.findById(id)
+        .map(existingBoard -> {
+          board.setBoardId(id);
+          return boardRepository.save(board);
+        });
   }
 
   @Override

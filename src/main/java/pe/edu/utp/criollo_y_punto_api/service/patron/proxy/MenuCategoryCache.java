@@ -1,6 +1,7 @@
 package pe.edu.utp.criollo_y_punto_api.service.patron.proxy;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,7 +27,7 @@ public class MenuCategoryCache implements MenuCategoryService {
   }
 
   @Override
-  public MenuCategory get(Integer menuCategoryId) {
+  public Optional<MenuCategory> get(Integer menuCategoryId) {
     if (menuCategoryList == null) {
       System.out.println("[cache] cache vacia, obteniendo de la base de datos");
       return menuCategoryService.get(menuCategoryId);
@@ -36,8 +37,7 @@ public class MenuCategoryCache implements MenuCategoryService {
 
     return menuCategoryList.stream()
         .filter(menuCategory -> menuCategory.getMenuCategoryId() == menuCategoryId)
-        .findFirst()
-        .orElse(null);
+        .findFirst();
   }
 
   @Override
@@ -48,9 +48,9 @@ public class MenuCategoryCache implements MenuCategoryService {
   }
 
   @Override
-  public MenuCategory update(MenuCategory menuCategory) {
+  public Optional<MenuCategory> update(Integer id, MenuCategory menuCategory) {
     clear();
-    return menuCategoryService.update(menuCategory);
+    return menuCategoryService.update(id, menuCategory);
   }
 
   @Override

@@ -1,6 +1,7 @@
 package pe.edu.utp.criollo_y_punto_api.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class JuridicalCustomerServiceImpl implements JuridicalCustomerService {
   }
 
   @Override
-  public JuridicalCustomer get(Integer juridicalCustomerId) {
-    return juridicalCustomerRepository.findById(juridicalCustomerId).orElse(null);
+  public Optional<JuridicalCustomer> get(Integer juridicalCustomerId) {
+    return juridicalCustomerRepository.findById(juridicalCustomerId);
   }
 
   @Override
@@ -36,8 +37,12 @@ public class JuridicalCustomerServiceImpl implements JuridicalCustomerService {
   }
 
   @Override
-  public JuridicalCustomer update(JuridicalCustomer juridicalCustomer) {
-    return juridicalCustomerRepository.save(juridicalCustomer);
+  public Optional<JuridicalCustomer> update(Integer id, JuridicalCustomer juridicalCustomer) {
+    return juridicalCustomerRepository.findById(id).map(existingJuridicalCustomer -> {
+      juridicalCustomer.setPersonId(id);
+
+      return juridicalCustomerRepository.save(juridicalCustomer);
+    });
   }
 
   @Override

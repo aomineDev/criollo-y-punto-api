@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.utp.criollo_y_punto_api.model.Order;
 import pe.edu.utp.criollo_y_punto_api.service.OrderService;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,32 +25,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class OrderController {
 
     @Autowired
-    private OrderService orderService;
+    private OrderService service;
 
     @GetMapping
     public ResponseEntity<List<Order>> getAllOrders() {
-        return ResponseEntity.ok(orderService.getAll());
+        return ResponseEntity.ok(service.getAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Order> getOrder(@PathVariable Integer id) {
-        Order order = orderService.get(id);
-        if (order != null) {
-            return ResponseEntity.ok(order);
-        }
-        return ResponseEntity.notFound().build();
+        return service.get(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public ResponseEntity<Order> createOrder(@RequestBody Order order) {
-        Order createdOrder = orderService.save(order);
+        Order createdOrder = service.save(order);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdOrder);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Order> updateOrder(@PathVariable Integer id,
+            @RequestBody Order order) {
+        return service.update(id, order)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteOrder(@PathVariable Integer id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}/start-preparation")
     public ResponseEntity<?> startPreparation(@PathVariable Integer id) {
         try {
-            Order order = orderService.startPreparation(id);
+            Order order = service.startPreparation(id);
             if (order != null) {
                 return ResponseEntity.ok(order);
             }
@@ -61,7 +75,7 @@ public class OrderController {
     @PutMapping("/{id}/mark-ready")
     public ResponseEntity<?> markAsReady(@PathVariable Integer id) {
         try {
-            Order order = orderService.markAsReady(id);
+            Order order = service.markAsReady(id);
             if (order != null) {
                 return ResponseEntity.ok(order);
             }
@@ -74,7 +88,7 @@ public class OrderController {
     @PutMapping("/{id}/deliver")
     public ResponseEntity<?> deliverOrder(@PathVariable Integer id) {
         try {
-            Order order = orderService.deliverOrder(id);
+            Order order = service.deliverOrder(id);
             if (order != null) {
                 return ResponseEntity.ok(order);
             }
@@ -87,7 +101,7 @@ public class OrderController {
     @PutMapping("/{id}/cancel")
     public ResponseEntity<?> cancelOrder(@PathVariable Integer id) {
         try {
-            Order order = orderService.cancelOrder(id);
+            Order order = service.cancelOrder(id);
             if (order != null) {
                 return ResponseEntity.ok(order);
             }
@@ -99,7 +113,7 @@ public class OrderController {
 
     @GetMapping("/{id}/status")
     public ResponseEntity<String> getOrderStatus(@PathVariable Integer id) {
-        Order order = orderService.get(id);
+        Order order = service.get(id).orElse(null);
         if (order != null) {
             return ResponseEntity.ok("Estado: " + order.getStatus());
         }

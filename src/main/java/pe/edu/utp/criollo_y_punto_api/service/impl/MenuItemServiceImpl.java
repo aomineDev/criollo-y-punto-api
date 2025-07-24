@@ -1,6 +1,7 @@
 package pe.edu.utp.criollo_y_punto_api.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class MenuItemServiceImpl implements MenuItemService {
   }
 
   @Override
-  public MenuItem get(Integer menuItemId) {
-    return menuItemRepository.findById(menuItemId).orElse(null);
+  public Optional<MenuItem> get(Integer menuItemId) {
+    return menuItemRepository.findById(menuItemId);
   }
 
   @Override
@@ -36,8 +37,12 @@ public class MenuItemServiceImpl implements MenuItemService {
   }
 
   @Override
-  public MenuItem update(MenuItem menuItem) {
-    return menuItemRepository.save(menuItem);
+  public Optional<MenuItem> update(Integer id, MenuItem menuItem) {
+    return menuItemRepository.findById(id).map(existingMenuItem -> {
+      menuItem.setMenuItemId(id);
+
+      return menuItemRepository.save(menuItem);
+    });
   }
 
   @Override

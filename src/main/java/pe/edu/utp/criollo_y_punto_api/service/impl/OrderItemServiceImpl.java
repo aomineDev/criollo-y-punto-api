@@ -1,6 +1,7 @@
 package pe.edu.utp.criollo_y_punto_api.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     @Override
-    public OrderItem get(Integer orderItemId) {
-        return orderItemRepository.findById(orderItemId).orElse(null);
+    public Optional<OrderItem> get(Integer orderItemId) {
+        return orderItemRepository.findById(orderItemId);
     }
 
     @Override
@@ -36,8 +37,12 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     @Override
-    public OrderItem update(OrderItem orderItem) {
-        return orderItemRepository.save(orderItem);
+    public Optional<OrderItem> update(Integer id, OrderItem orderItem) {
+        return orderItemRepository.findById(id).map(existingOrderItem -> {
+            orderItem.setOrderItemId(id);
+
+            return orderItemRepository.save(orderItem);
+        });
     }
 
     @Override

@@ -1,6 +1,7 @@
 package pe.edu.utp.criollo_y_punto_api.service.patron.proxy;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,7 +28,7 @@ public class MenuItemCache implements MenuItemService {
   }
 
   @Override
-  public MenuItem get(Integer menuItemid) {
+  public Optional<MenuItem> get(Integer menuItemid) {
     if (menuItemList == null) {
       System.out.println("[cache] cache vacia, obteniendo de la base de datos");
       return menuItemService.get(menuItemid);
@@ -36,8 +37,7 @@ public class MenuItemCache implements MenuItemService {
     System.out.println("[cache] obteniendo datos de la cache");
     return menuItemList.stream()
         .filter(menuItem -> menuItem.getMenuItemId() == menuItemid)
-        .findFirst()
-        .orElse(null);
+        .findFirst();
   }
 
   @Override
@@ -47,9 +47,9 @@ public class MenuItemCache implements MenuItemService {
   }
 
   @Override
-  public MenuItem update(MenuItem menuItem) {
+  public Optional<MenuItem> update(Integer id, MenuItem menuItem) {
     clear();
-    return menuItemService.update(menuItem);
+    return menuItemService.update(id, menuItem);
   }
 
   @Override
