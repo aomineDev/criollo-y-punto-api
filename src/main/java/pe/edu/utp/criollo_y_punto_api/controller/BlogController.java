@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.edu.utp.criollo_y_punto_api.model.Blog;
 import pe.edu.utp.criollo_y_punto_api.service.BlogService;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -31,6 +33,18 @@ public class BlogController {
     Blog createdBlog = blogService.save(blog);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(createdBlog);
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deleteBlog(@PathVariable Integer id) {
+    Blog blog = blogService.get(id);
+
+    if (blog == null) {
+      return ResponseEntity.notFound().build();
+    }
+
+    blogService.delete(id);
+    return ResponseEntity.noContent().build();
   }
 
 }
