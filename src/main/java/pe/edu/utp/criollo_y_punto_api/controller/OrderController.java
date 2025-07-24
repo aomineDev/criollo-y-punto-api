@@ -59,65 +59,65 @@ public class OrderController {
         return ResponseEntity.noContent().build();
     }
 
-    // @PutMapping("/{id}/start-preparation")
-    // public ResponseEntity<?> startPreparation(@PathVariable Integer id) {
-    // try {
-    // Order order = orderService.startPreparation(id);
-    // if (order != null) {
-    // return ResponseEntity.ok(order);
-    // }
-    // return ResponseEntity.notFound().build();
-    // } catch (IllegalStateException e) {
-    // return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-    // }
-    // }
+    @PutMapping("/{id}/start-preparation")
+    public ResponseEntity<?> startPreparation(@PathVariable Integer id) {
+        try {
+            Order order = service.startPreparation(id);
+            if (order != null) {
+                return ResponseEntity.ok(order);
+            }
+            return ResponseEntity.notFound().build();
+        } catch (IllegalStateException e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
 
-    // @PutMapping("/{id}/mark-ready")
-    // public ResponseEntity<?> markAsReady(@PathVariable Integer id) {
-    // try {
-    // Order order = orderService.markAsReady(id);
-    // if (order != null) {
-    // return ResponseEntity.ok(order);
-    // }
-    // return ResponseEntity.notFound().build();
-    // } catch (IllegalStateException e) {
-    // return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-    // }
-    // }
+    @PutMapping("/{id}/mark-ready")
+    public ResponseEntity<?> markAsReady(@PathVariable Integer id) {
+        try {
+            Order order = service.markAsReady(id);
+            if (order != null) {
+                return ResponseEntity.ok(order);
+            }
+            return ResponseEntity.notFound().build();
+        } catch (IllegalStateException e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
 
-    // @PutMapping("/{id}/deliver")
-    // public ResponseEntity<?> deliverOrder(@PathVariable Integer id) {
-    // try {
-    // Order order = orderService.deliverOrder(id);
-    // if (order != null) {
-    // return ResponseEntity.ok(order);
-    // }
-    // return ResponseEntity.notFound().build();
-    // } catch (IllegalStateException e) {
-    // return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-    // }
-    // }
+    @PutMapping("/{id}/deliver")
+    public ResponseEntity<?> deliverOrder(@PathVariable Integer id) {
+        try {
+            Order order = service.deliverOrder(id);
+            if (order != null) {
+                return ResponseEntity.ok(order);
+            }
+            return ResponseEntity.notFound().build();
+        } catch (IllegalStateException e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
 
-    // @PutMapping("/{id}/cancel")
-    // public ResponseEntity<?> cancelOrder(@PathVariable Integer id) {
-    // try {
-    // Order order = orderService.cancelOrder(id);
-    // if (order != null) {
-    // return ResponseEntity.ok(order);
-    // }
-    // return ResponseEntity.notFound().build();
-    // } catch (IllegalStateException e) {
-    // return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-    // }
-    // }
+    @PutMapping("/{id}/cancel")
+    public ResponseEntity<?> cancelOrder(@PathVariable Integer id) {
+        try {
+            Order order = service.cancelOrder(id);
+            if (order != null) {
+                return ResponseEntity.ok(order);
+            }
+            return ResponseEntity.notFound().build();
+        } catch (IllegalStateException e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
 
-    // @GetMapping("/{id}/status")
-    // public ResponseEntity<String> getOrderStatus(@PathVariable Integer id) {
-    // Order order = orderService.get(id);
-    // if (order != null) {
-    // return ResponseEntity.ok("Estado: " + order.getStatus());
-    // }
-    // return ResponseEntity.notFound().build();
-    // }
+    @GetMapping("/{id}/status")
+    public ResponseEntity<String> getOrderStatus(@PathVariable Integer id) {
+        Order order = service.get(id).orElse(null);
+        if (order != null) {
+            return ResponseEntity.ok("Estado: " + order.getStatus());
+        }
+        return ResponseEntity.notFound().build();
+    }
 
 }
