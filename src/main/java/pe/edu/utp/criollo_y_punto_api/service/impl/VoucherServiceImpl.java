@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pe.edu.utp.criollo_y_punto_api.model.Invoice;
+import pe.edu.utp.criollo_y_punto_api.model.JuridicalCustomer;
 import pe.edu.utp.criollo_y_punto_api.model.NaturalCustomer;
 import pe.edu.utp.criollo_y_punto_api.model.Order;
 import pe.edu.utp.criollo_y_punto_api.model.Ticket;
+import pe.edu.utp.criollo_y_punto_api.model.Voucher;
 import pe.edu.utp.criollo_y_punto_api.service.InvoiceService;
+import pe.edu.utp.criollo_y_punto_api.service.JuridicalCustomerService;
 import pe.edu.utp.criollo_y_punto_api.service.NaturalCustomerService;
 import pe.edu.utp.criollo_y_punto_api.service.OrderService;
 import pe.edu.utp.criollo_y_punto_api.service.TicketService;
@@ -31,6 +34,9 @@ public class VoucherServiceImpl implements VoucherService {
     @Autowired
     private NaturalCustomerService naturalCustomerService;
 
+    @Autowired
+    private JuridicalCustomerService juridicalCustomerService;
+
     @Override
     public Ticket generarTicket(Ticket ticket) {
 
@@ -40,28 +46,34 @@ public class VoucherServiceImpl implements VoucherService {
         VoucherFactory factory = new TicketFactory(customer);
         Ticket nuevoTicket = (Ticket) factory.createVoucher(order);
 
-        double discount = ticket.getDiscount() != null ? ticket.getDiscount() : 0.0;
-        double additional = ticket.getAdditionalPayments() != null ? ticket.getAdditionalPayments() : 0.0;
-
-        nuevoTicket.setDiscount(discount);
-        nuevoTicket.setAdditionalPayments(additional);
-
-        double finalTotal = nuevoTicket.getTotalPrice() - discount + additional;
-        nuevoTicket.setTotalPrice(finalTotal);
+        aplicarDescuentosYAdicionales(nuevoTicket, ticket);
 
         return ticketService.save(nuevoTicket);
     }
 
     @Override
     public Invoice generarInvoice(Invoice invoice) {
-        VoucherFactory factory = new InvoiceFactory(invoice.getJuridicalCustomer());
-        Invoice nuevaFactura = (Invoice) factory.createVoucher(invoice.getOrder());
 
-        // nuevaFactura.setDiscount(invoice.getDiscount());
-        // nuevaFactura.setAdditionalPayments(invoice.getAdditionalPayments());
-        // nuevaFactura.setTurned(invoice.getTurned());
+        Order order = orderService.get(invoice.getOrder().getOrderId());
+        JuridicalCustomer customer = juridicalCustomerService.get(invoice.getJuridicalCustomer().getPersonId());
+
+        VoucherFactory factory = new InvoiceFactory(customer);
+        Invoice nuevaFactura = (Invoice) factory.createVoucher(order);
+
+        aplicarDescuentosYAdicionales(nuevaFactura, invoice);
 
         return invoiceService.save(nuevaFactura);
+    }
+
+    public void aplicarDescuentosYAdicionales(Voucher base, Voucher entrada) {
+        double discount = entrada.getDiscount() != null ? entrada.getDiscount() : 0.0;
+        double additional = entrada.getAdditionalPayments() != null ? entrada.getAdditionalPayments() : 0.0;
+
+        base.setDiscount(discount);
+        base.setAdditionalPayments(additional);
+
+        double finalTotal = base.getTotalPrice() - discount + additional;
+        base.setTotalPrice(finalTotal);
     }
 
 }

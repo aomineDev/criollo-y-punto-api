@@ -11,28 +11,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.edu.utp.criollo_y_punto_api.model.Ticket;
-import pe.edu.utp.criollo_y_punto_api.service.TicketService;
+import pe.edu.utp.criollo_y_punto_api.model.Invoice;
+import pe.edu.utp.criollo_y_punto_api.service.InvoiceService;
 import pe.edu.utp.criollo_y_punto_api.service.VoucherService;
 
 @RestController
-@RequestMapping("/api/ticket")
-public class TicketController {
+@RequestMapping("/api/invoice")
+public class InvoiceController {
 
     @Autowired
     private VoucherService voucherService;
 
     @Autowired
-    private TicketService ticketService;
+    private InvoiceService invoiceService;
 
     @GetMapping()
-    public ResponseEntity<List<Ticket>> getTicket() {
-        return ResponseEntity.ok(ticketService.getAll());
+    public ResponseEntity<List<Invoice>> getInvoice() {
+        return ResponseEntity.ok(invoiceService.getAll());
     }
 
     @PostMapping()
-    public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
-        Ticket nuevoTicket = voucherService.generarTicket(ticket);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoTicket);
+    public ResponseEntity<Invoice> createInvoice(@RequestBody Invoice invoice) {
+        Invoice nuevoInvoice = voucherService.generarInvoice(invoice);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoInvoice);
     }
 }
