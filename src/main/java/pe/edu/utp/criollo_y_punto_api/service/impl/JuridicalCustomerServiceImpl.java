@@ -10,6 +10,12 @@ import pe.edu.utp.criollo_y_punto_api.model.JuridicalCustomer;
 import pe.edu.utp.criollo_y_punto_api.repository.JuridicalCustomerRepository;
 import pe.edu.utp.criollo_y_punto_api.service.JuridicalCustomerService;
 
+/*
+ * Este servicio implementa la lógica de negocio para la entidad JuridicalCustomer, permitiendo gestionar sus operaciones básicas
+ *  como listar, obtener, guardar, actualizar y eliminar entradas de JuridicalCustomer. Utiliza JuricalCustomerRepository para interactuar
+ *  con la base de datos, delegando las operaciones CRUD a través de métodos proporcionados por JpaRepository, 
+ * lo que facilita el acceso a los datos sin necesidad de escribir consultas manuales.
+ */
 @Service
 public class JuridicalCustomerServiceImpl implements JuridicalCustomerService {
   @Autowired

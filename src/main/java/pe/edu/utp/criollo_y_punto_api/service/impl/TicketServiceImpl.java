@@ -10,6 +10,12 @@ import pe.edu.utp.criollo_y_punto_api.model.Ticket;
 import pe.edu.utp.criollo_y_punto_api.repository.TicketRepository;
 import pe.edu.utp.criollo_y_punto_api.service.TicketService;
 
+/*
+ * Este servicio implementa la lógica de negocio para la entidad Ticket, permitiendo gestionar sus operaciones básicas
+ *  como listar, obtener, guardar, actualizar y eliminar entradas de Ticket. Utiliza TicketRepository para interactuar
+ *  con la base de datos, delegando las operaciones CRUD a través de métodos proporcionados por JpaRepository, 
+ * lo que facilita el acceso a los datos sin necesidad de escribir consultas manuales.
+ */
 @Service
 public class TicketServiceImpl implements TicketService {
     @Autowired
