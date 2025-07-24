@@ -9,6 +9,12 @@ import pe.edu.utp.criollo_y_punto_api.model.Reserve;
 import pe.edu.utp.criollo_y_punto_api.repository.ReserveRepository;
 import pe.edu.utp.criollo_y_punto_api.service.ReserveService;
 
+/*
+ * Este servicio implementa la lógica de negocio para la entidad Reserve, permitiendo gestionar sus operaciones básicas
+ *  como listar, obtener, guardar, actualizar y eliminar entradas de Reserve. Utiliza ReserveRepository para interactuar
+ *  con la base de datos, delegando las operaciones CRUD a través de métodos proporcionados por JpaRepository, 
+ * lo que facilita el acceso a los datos sin necesidad de escribir consultas manuales.
+ */
 @Service
 public class ReserveServiceImpl implements ReserveService {
     @Autowired
